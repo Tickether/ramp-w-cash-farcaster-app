@@ -8,7 +8,7 @@ export const config = createConfig({
     chains: [celo, optimism],
     ssr: true,
     transports: {
-      [celo.id]: http(process.env.NEXT_PUBLIC_ALCHEMY_RPC_URL),
+      [celo.id]: http(),
       [optimism.id]: http(),
     },
 });
