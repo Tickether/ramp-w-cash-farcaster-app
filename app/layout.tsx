@@ -13,7 +13,7 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "Ramp w/ Cash 💸",
-  description: "Onramp cusd, usdt & usdc using African Local Currencies onto Farcaster wallet",
+  description: "Onramp cUSD, USDT & USDC using African Local Currencies onto Farcaster wallet",
 };
 
 export default function RootLayout({
