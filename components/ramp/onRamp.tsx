@@ -5,18 +5,14 @@ import { useState } from "react";
 
 // Token data for each network
 const networkTokens = {
-  celo: [
-    { symbol: "CELO", name: "Celo", icon: "🟡" },
-    { symbol: "cUSD", name: "Celo Dollar", icon: "💵" },
-    { symbol: "cEUR", name: "Celo Euro", icon: "💶" },
-    { symbol: "cREAL", name: "Celo Real", icon: "🇧🇷" },
-  ],
-  base: [
-    { symbol: "ETH", name: "Ethereum", icon: "🔷" },
-    { symbol: "USDC", name: "USD Coin", icon: "💙" },
-    { symbol: "USDbC", name: "USD Base Coin", icon: "🔵" },
-    { symbol: "DAI", name: "Dai", icon: "🟢" },
-  ]
+    celo: [
+      { symbol: "cUSD", name: "Celo Dollar", icon: "https://assets.coingecko.com/coins/images/13161/standard/icon-celo-dollar-color-1000-circle-cropped.png?1696512945" },
+      { symbol: "USDT", name: "Tether", icon: "https://assets.coingecko.com/coins/images/325/standard/Tether.png?1696501661" },
+      { symbol: "USDC", name: "USD Coin", icon: "https://assets.coingecko.com/coins/images/6319/standard/usdc.png?1696506694" },
+    ],
+    base: [
+      { symbol: "USDC", name: "USD Coin", icon: "https://assets.coingecko.com/coins/images/6319/standard/usdc.png?1696506694" },
+    ]
 };
 
 export function OnRamp() {
