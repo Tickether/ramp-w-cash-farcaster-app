@@ -1,7 +1,8 @@
 "use client"
 
 //import { useState } from "react";
-import { Button } from "../ui/button";
+import { OnRamp } from "./onRamp";
+import { OffRamp } from "./offRamp";
 
 export function Wrapper() {
 
@@ -18,8 +19,8 @@ export function Wrapper() {
                 </div>
             </div>
             <div className="flex flex-col sm:flex-row gap-4">
-                <Button size="lg" className="min-w-[200px]">On-ramp</Button>
-                <Button size="lg" variant="outline" className="min-w-[200px]">Off-ramp</Button>
+                <OnRamp />
+                <OffRamp />
             </div>
         </div>
     )
