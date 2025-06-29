@@ -28,7 +28,7 @@ export default function RootLayout({
       title: "Ramp w/ Cash 💸",
       action: {
         type: "launch_frame",
-        url: "",
+        url: "https://ramp-w-cash.vercel.app",
         name:"Ramp w/ Cash 💸",
         splashImageUrl: "💸",
         splashBackgroundColor:"#f5f0ec"
