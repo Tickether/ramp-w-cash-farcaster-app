@@ -1,4 +1,3 @@
-
 import Image from "next/image";
 import { Button } from "../../ui/button";
 import { Drawer, DrawerTitle, DrawerContent, DrawerDescription, DrawerFooter, DrawerHeader, DrawerTrigger } from "../../ui/drawer";
@@ -7,28 +6,29 @@ import { useState } from "react";
 import { OnRamp } from "./onRamp";
 import { useAccount } from "wagmi";
 import { Input } from "@/components/ui/input";
-import { REGEXP_ONLY_DIGITS } from "input-otp";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-
-// Token data for each network
-const networkTokens = {
-    celo: [
-      { symbol: "cUSD", name: "Celo Dollar", icon: "https://assets.coingecko.com/coins/images/13161/standard/icon-celo-dollar-color-1000-circle-cropped.png?1696512945" },
-      { symbol: "USDT", name: "Tether", icon: "https://assets.coingecko.com/coins/images/325/standard/Tether.png?1696501661" },
-      { symbol: "USDC", name: "USD Coin", icon: "https://assets.coingecko.com/coins/images/6319/standard/usdc.png?1696506694" },
-    ],
-    base: [
-      { symbol: "USDC", name: "USD Coin", icon: "https://assets.coingecko.com/coins/images/6319/standard/usdc.png?1696506694" },
-    ]
-};
+import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
 
 const formSchema = z.object({
-    amount: z.number().min(0)
-  });
+    amount: z.string()
+});
 
 export function Deposit() {
+
+    // Token data for each network
+    const networkTokens = {
+        celo: [
+        { symbol: "cUSD", name: "Celo Dollar", icon: "https://assets.coingecko.com/coins/images/13161/standard/icon-celo-dollar-color-1000-circle-cropped.png?1696512945" },
+        { symbol: "USDT", name: "Tether", icon: "https://assets.coingecko.com/coins/images/325/standard/Tether.png?1696501661" },
+        { symbol: "USDC", name: "USD Coin", icon: "https://assets.coingecko.com/coins/images/6319/standard/usdc.png?1696506694" },
+        ],
+        base: [
+        { symbol: "USDC", name: "USD Coin", icon: "https://assets.coingecko.com/coins/images/6319/standard/usdc.png?1696506694" },
+        ]
+    };
+
 
     const { address } = useAccount()
     
@@ -36,19 +36,29 @@ export function Deposit() {
     const [selectedToken, setSelectedToken] = useState<string | null>(null);
 
     
-    const [amount, setAmount] = useState<number>(0)
+    const [amount, setAmount] = useState<string>("")
     const [loadingAddCeloDollar, setLoadingAddCeloDollar] = useState(false)
     const [openOnRamp, setOpenOnRamp] = useState(false)
     const [reference, setReference] = useState("")
 
     const form = useForm < z.infer < typeof formSchema >> ({
         resolver: zodResolver(formSchema),
-        defaultValues: {
-            amount: 0,
-        },
-      
+        
+    
+    })
 
-      })
+    function onSubmit(values: z.infer < typeof formSchema > ) {
+        try {
+            console.log(values);
+            setLoadingAddCeloDollar(true)
+                setOpenOnRamp(true)
+                setAmount(values.amount)
+                const ref = `${address}-${(new Date()).getTime().toString()}`
+                setReference(ref)
+        } catch (error) {
+            console.error("Form submission error", error);
+        }
+    }
 
 
     const handleNetworkSelect = (network: 'celo' | 'base') => {
@@ -60,12 +70,7 @@ export function Deposit() {
         setSelectedToken(tokenSymbol);
     };
 
-    const onRamp = () => {
-        setLoadingAddCeloDollar(true)
-        setOpenOnRamp(true)
-        const ref = `${address}-${(new Date()).getTime().toString()}`
-        setReference(ref)
-    }
+    
 
     return (
         <Drawer>
@@ -140,39 +145,54 @@ export function Deposit() {
                         {/* Amount Input */}
                         {selectedToken && (
                             <div className="space-y-2">
-                                <label className="text-sm font-medium text-foreground">Amount</label>
-                                <div className="relative">
-                                    <Input
-                                        type="text"
-                                        pattern={REGEXP_ONLY_DIGITS}
-                                        disabled={loadingAddCeloDollar}
-                                        placeholder={"0.00"}
-                                        className="w-full h-12 px-4 rounded-xl border border-input bg-background text-sm focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2"
-                                    />
-                                    <div className="absolute right-3 top-1/2 transform -translate-y-1/2 text-sm text-muted-foreground">
-                                        {selectedToken}
-                                    </div>
-                                </div>
+                                <Form {...form}>
+                                    <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8 max-w-3xl mx-auto py-10">
+                                        
+                                        <FormField
+                                        control={form.control}
+                                        name="amount"
+                                        render={({ field }) => (
+                                            <FormItem>
+                                                <FormLabel>Amount</FormLabel>
+                                                <FormControl>
+                                                    <Input 
+                                                        {...field}
+                                                        placeholder="Enter an Amount..."
+                                                        // Only allow digits:
+                                                        onChange={(e) => {
+                                                            // remove every non-digit
+                                                            const onlyNums = e.target.value.replace(/\D+/g, "");
+                                                            field.onChange(onlyNums);
+                                                        }}
+                                                    />
+                                                </FormControl>
+                                                <FormMessage />
+                                            </FormItem>
+                                        )}
+                                        />
+                                        {selectedNetwork && selectedToken && (
+                                            <Button className="w-full h-12 rounded-xl">
+                                                {
+                                                    loadingAddCeloDollar ? (
+                                                        <Loader2 className="mr-2 animate-spin" />
+                                                    ) : (
+                                                        <>
+                                                            <Zap className="mr-2" />
+                                                            
+                                                        </>
+                                                    )
+                                                }
+                                                <p>Continue to On-ramp</p>
+                                            </Button>
+                                        )}
+                                    </form>
+                                </Form>
                             </div>
                         )}
                     </div>
                     
                     <DrawerFooter className="px-4">
-                        {selectedNetwork && selectedToken && (
-                            <Button className="w-full h-12 rounded-xl">
-                                {
-                                    loadingAddCeloDollar ? (
-                                        <Loader2 className="mr-2 animate-spin" />
-                                    ) : (
-                                        <>
-                                            <Zap className="mr-2" />
-                                            
-                                        </>
-                                    )
-                                }
-                                <p>Continue to On-ramp</p>
-                            </Button>
-                        )}
+                        
                     </DrawerFooter>
                 </div>
             </DrawerContent>
@@ -181,9 +201,9 @@ export function Deposit() {
                 <OnRamp
                     setOpenOnRamp={setOpenOnRamp}
                     address={address!}
-                    coin={selectedToken!}
-                    network={selectedNetwork!}
-                    amount={amount.toString()}
+                    coin={selectedToken!.toUpperCase()}
+                    network={selectedNetwork!.toUpperCase()}
+                    amount={amount}
                     reference={reference}
                     setLoadingAddCeloDollar={setLoadingAddCeloDollar}
                 />
