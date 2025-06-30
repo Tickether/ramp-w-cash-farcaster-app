@@ -2,8 +2,15 @@
 import Image from "next/image";
 import { Button } from "../../ui/button";
 import { Drawer, DrawerTitle, DrawerContent, DrawerDescription, DrawerFooter, DrawerHeader, DrawerTrigger } from "../../ui/drawer";
-import { BanknoteArrowUp, Zap } from "lucide-react";
+import { BanknoteArrowUp, Loader2, Zap } from "lucide-react";
 import { useState } from "react";
+import { OnRamp } from "./onRamp";
+import { useAccount } from "wagmi";
+import { Input } from "@/components/ui/input";
+import { REGEXP_ONLY_DIGITS } from "input-otp";
+import { useForm } from "react-hook-form";
+import { z } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
 
 // Token data for each network
 const networkTokens = {
@@ -17,9 +24,32 @@ const networkTokens = {
     ]
 };
 
+const formSchema = z.object({
+    amount: z.number().min(0)
+  });
+
 export function Deposit() {
+
+    const { address } = useAccount()
+    
     const [selectedNetwork, setSelectedNetwork] = useState<'celo' | 'base' | null>(null);
     const [selectedToken, setSelectedToken] = useState<string | null>(null);
+
+    
+    const [amount, setAmount] = useState<number>(0)
+    const [loadingAddCeloDollar, setLoadingAddCeloDollar] = useState(false)
+    const [openOnRamp, setOpenOnRamp] = useState(false)
+    const [reference, setReference] = useState("")
+
+    const form = useForm < z.infer < typeof formSchema >> ({
+        resolver: zodResolver(formSchema),
+        defaultValues: {
+            amount: 0,
+        },
+      
+
+      })
+
 
     const handleNetworkSelect = (network: 'celo' | 'base') => {
         setSelectedNetwork(network);
@@ -29,6 +59,13 @@ export function Deposit() {
     const handleTokenSelect = (tokenSymbol: string) => {
         setSelectedToken(tokenSymbol);
     };
+
+    const onRamp = () => {
+        setLoadingAddCeloDollar(true)
+        setOpenOnRamp(true)
+        const ref = `${address}-${(new Date()).getTime().toString()}`
+        setReference(ref)
+    }
 
     return (
         <Drawer>
@@ -105,9 +142,11 @@ export function Deposit() {
                             <div className="space-y-2">
                                 <label className="text-sm font-medium text-foreground">Amount</label>
                                 <div className="relative">
-                                    <input
-                                        type="number"
-                                        placeholder="0.00"
+                                    <Input
+                                        type="text"
+                                        pattern={REGEXP_ONLY_DIGITS}
+                                        disabled={loadingAddCeloDollar}
+                                        placeholder={"0.00"}
                                         className="w-full h-12 px-4 rounded-xl border border-input bg-background text-sm focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2"
                                     />
                                     <div className="absolute right-3 top-1/2 transform -translate-y-1/2 text-sm text-muted-foreground">
@@ -121,13 +160,35 @@ export function Deposit() {
                     <DrawerFooter className="px-4">
                         {selectedNetwork && selectedToken && (
                             <Button className="w-full h-12 rounded-xl">
-                                <Zap className="mr-2" />
-                                Continue to On-ramp
+                                {
+                                    loadingAddCeloDollar ? (
+                                        <Loader2 className="mr-2 animate-spin" />
+                                    ) : (
+                                        <>
+                                            <Zap className="mr-2" />
+                                            
+                                        </>
+                                    )
+                                }
+                                <p>Continue to On-ramp</p>
                             </Button>
                         )}
                     </DrawerFooter>
                 </div>
             </DrawerContent>
+        
+        {openOnRamp && (
+                <OnRamp
+                    setOpenOnRamp={setOpenOnRamp}
+                    address={address!}
+                    coin={selectedToken!}
+                    network={selectedNetwork!}
+                    amount={amount.toString()}
+                    reference={reference}
+                    setLoadingAddCeloDollar={setLoadingAddCeloDollar}
+                />
+            )}
         </Drawer>
+        
     )
 }

@@ -3,11 +3,14 @@ import { Minimize2 } from "lucide-react";
 interface DepositProps {
     setOpenOnRamp: (openOnRamp : boolean) => void
     address: `0x${string}`
+    coin: string
+    network: string
+    amount: string
     reference: string   
     setLoadingAddCeloDollar: (loadingAddCeloDollar: boolean) => void
 }
 
-export function Deposit({ setOpenOnRamp, address, reference, setLoadingAddCeloDollar } : DepositProps) {
+export function OnRamp({ setOpenOnRamp, address, coin, network, amount, reference, setLoadingAddCeloDollar } : DepositProps) {
 
     
     
@@ -31,7 +34,7 @@ export function Deposit({ setOpenOnRamp, address, reference, setLoadingAddCeloDo
                     <iframe
                         src={
                             `
-                                https://useaccrue.com/hosted/ramp?key=CSHRMP-PUBK_pVc9ndu0HOOS4opC&paymentType=deposit&address=${address}&coin=CUSD&network=CELO&reference=${reference}&isWalletContext=false
+                                https://useaccrue.com/hosted/ramp?key=CSHRMP-PUBK_pVc9ndu0HOOS4opC&paymentType=deposit&address=${address}&coin=${coin}&network=${network}&amount=${amount}&reference=${reference}&isWalletContext=false
                             `
                         }
                         title="cashRamp"
