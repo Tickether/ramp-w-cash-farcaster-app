@@ -68,7 +68,7 @@ export function Deposit() {
                                     onClick={() => handleNetworkSelect('base')}
                                 >
                                     <div className="w-6 h-6 bg-blue-500 rounded-full flex items-center justify-center text-white text-xs font-bold">
-                                        <Image src="https://basescan.org/assets/base/images/svg/logos/chain-light.svg?v=25.6.4.0" alt="Base" width={24} height={24} />
+                                        <Image src="https://avatars.githubusercontent.com/u/16627100?s=200&v=4" alt="Base" width={24} height={24} />
                                     </div>
                                     Base
                                 </Button>
