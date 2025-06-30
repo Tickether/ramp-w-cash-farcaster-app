@@ -1,8 +1,10 @@
 "use client"
 
+import { Deposit } from "./on/deposit";
+import { Withdraw } from "./off/withdraw";
+
 //import { useState } from "react";
-import { OnRamp } from "./onRamp";
-import { OffRamp } from "./offRamp";
+
 
 export function Wrapper() {
 
@@ -19,8 +21,8 @@ export function Wrapper() {
                 </div>
             </div>
             <div className="flex flex-col sm:flex-row gap-4">
-                <OnRamp />
-                <OffRamp />
+                <Deposit />
+                <Withdraw />
             </div>
         </div>
     )

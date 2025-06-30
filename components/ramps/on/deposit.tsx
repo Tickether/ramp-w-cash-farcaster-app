@@ -1,6 +1,8 @@
-import { Button } from "../ui/button";
-import { Drawer, DrawerTitle, DrawerContent, DrawerDescription, DrawerFooter, DrawerHeader, DrawerTrigger } from "../ui/drawer";
-import { BanknoteArrowUp, Coins, Zap } from "lucide-react";
+
+import Image from "next/image";
+import { Button } from "../../ui/button";
+import { Drawer, DrawerTitle, DrawerContent, DrawerDescription, DrawerFooter, DrawerHeader, DrawerTrigger } from "../../ui/drawer";
+import { BanknoteArrowUp, Zap } from "lucide-react";
 import { useState } from "react";
 
 // Token data for each network
@@ -15,7 +17,7 @@ const networkTokens = {
     ]
 };
 
-export function OnRamp() {
+export function Deposit() {
     const [selectedNetwork, setSelectedNetwork] = useState<'celo' | 'base' | null>(null);
     const [selectedToken, setSelectedToken] = useState<string | null>(null);
 
@@ -56,7 +58,7 @@ export function OnRamp() {
                                     onClick={() => handleNetworkSelect('celo')}
                                 >
                                     <div className="w-6 h-6 bg-yellow-500 rounded-full flex items-center justify-center text-white text-xs font-bold">
-                                        C
+                                        <Image src="https://assets.coingecko.com/coins/images/11090/standard/InjXBNx9_400x400.jpg?1696511031" alt="Celo" width={24} height={24} />
                                     </div>
                                     Celo
                                 </Button>
@@ -66,7 +68,7 @@ export function OnRamp() {
                                     onClick={() => handleNetworkSelect('base')}
                                 >
                                     <div className="w-6 h-6 bg-blue-500 rounded-full flex items-center justify-center text-white text-xs font-bold">
-                                        B
+                                        <Image src="https://basescan.org/assets/base/images/svg/logos/chain-light.svg?v=25.6.4.0" alt="Base" width={24} height={24} />
                                     </div>
                                     Base
                                 </Button>
@@ -85,7 +87,9 @@ export function OnRamp() {
                                             className="h-16 rounded-xl flex flex-col items-center justify-center gap-1"
                                             onClick={() => handleTokenSelect(token.symbol)}
                                         >
-                                            <span className="text-lg">{token.icon}</span>
+                                            <span className="text-lg">
+                                                <Image src={token.icon} alt={token.name} width={24} height={24} />
+                                            </span>
                                             <div className="text-xs font-medium">{token.symbol}</div>
                                             <div className="text-xs text-muted-foreground">{token.name}</div>
                                         </Button>
