@@ -57,7 +57,7 @@ export function Withdraw() {
                                     onClick={() => handleNetworkSelect('celo')}
                                 >
                                     <div className="w-6 h-6 bg-yellow-500 rounded-full flex items-center justify-center text-white text-xs font-bold">
-                                        C
+                                        <Image src="https://assets.coingecko.com/coins/images/11090/standard/InjXBNx9_400x400.jpg?1696511031" alt="Celo" width={24} height={24} />
                                     </div>
                                     Celo
                                 </Button>
@@ -67,7 +67,7 @@ export function Withdraw() {
                                     onClick={() => handleNetworkSelect('base')}
                                 >
                                     <div className="w-6 h-6 bg-blue-500 rounded-full flex items-center justify-center text-white text-xs font-bold">
-                                        B
+                                        <Image src="https://avatars.githubusercontent.com/u/16627100?s=200&v=4" alt="Base" width={24} height={24} />
                                     </div>
                                     Base
                                 </Button>
@@ -86,11 +86,13 @@ export function Withdraw() {
                                             className="h-16 rounded-xl flex flex-col items-center justify-center gap-1"
                                             onClick={() => handleTokenSelect(token.symbol)}
                                         >
-                                            <span className="text-lg">
-                                                <Image src={token.icon} alt={token.name} width={24} height={24} />
-                                            </span>
-                                            <div className="text-xs font-medium">{token.symbol}</div>
-                                            <div className="text-xs text-muted-foreground">{token.name}</div>
+                                           <div className="flex flex-col items-center justify-center">
+                                                <span className="text-lg">
+                                                    <Image src={token.icon} alt={token.name} width={24} height={24} />
+                                                </span>
+                                                <div className="text-xs font-medium">{token.symbol}</div>
+                                                <div className="text-xs text-muted-foreground">{token.name}</div>
+                                            </div>
                                         </Button>
                                     ))}
                                 </div>

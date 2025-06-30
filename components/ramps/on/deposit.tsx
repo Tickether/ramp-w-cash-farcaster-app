@@ -87,11 +87,13 @@ export function Deposit() {
                                             className="h-16 rounded-xl flex flex-col items-center justify-center gap-1"
                                             onClick={() => handleTokenSelect(token.symbol)}
                                         >
-                                            <span className="text-lg">
-                                                <Image src={token.icon} alt={token.name} width={24} height={24} />
-                                            </span>
-                                            <div className="text-xs font-medium">{token.symbol}</div>
-                                            <div className="text-xs text-muted-foreground">{token.name}</div>
+                                            <div className="flex flex-col items-center justify-center">
+                                                <span className="text-lg">
+                                                    <Image src={token.icon} alt={token.name} width={24} height={24} />
+                                                </span>
+                                                <div className="text-xs font-medium">{token.symbol}</div>
+                                                <div className="text-xs text-muted-foreground">{token.name}</div>
+                                            </div>
                                         </Button>
                                     ))}
                                 </div>
