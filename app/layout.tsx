@@ -40,7 +40,7 @@ export default function RootLayout({
       <head>
         <meta 
         property="og:image" 
-          content="" 
+          content="https://ramp-w-cash.vercel.app/opengraph-image.png" 
         />
         <meta 
           name="fc:frame"
