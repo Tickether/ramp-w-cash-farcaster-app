@@ -23,14 +23,14 @@ export default function RootLayout({
 }>) {
   const frame = {
     version: "next",
-    imageUrl: "",
+    imageUrl: "https://ramp-w-cash.vercel.app/opengraph-image.png",
     button: {
       title: "Ramp w/ Cash 💸",
       action: {
         type: "launch_frame",
         url: "https://ramp-w-cash.vercel.app",
         name:"Ramp w/ Cash 💸",
-        splashImageUrl: "💸",
+        splashImageUrl: "https://ramp-w-cash.vercel.app/logo.png",
         splashBackgroundColor:"#f5f0ec"
       }
     }
