@@ -14,8 +14,8 @@
     "splashImageUrl": "https://ramp-w-cash.vercel.app/logo.png",
     "splashBackgroundColor": "#f5f0ec",
     "webhookUrl": "https://ramp-w-cash.vercel.app/webhook",
-    "subtitle": "Ramp w/ Cash 💸",
-    "description": "Onramp cUSD, USDT & USDC using African Local Currencies onto Farcaster wallet.",
+    "subtitle": "Ramp w. Cash",
+    "description": "Onramp cUSD, USDT, USDC using African Local Currencies onto Farcaster wallet.",
     "screenshotUrls": [
       "https://ramp-w-cash.vercel.app/screenshotA.jpg",
       "https://ramp-w-cash.vercel.app/screenshotB.jpg",
@@ -26,9 +26,9 @@
       "defi"
     ],
     "heroImageUrl": "https://ramp-w-cash.vercel.app/opengraph-image.png",
-    "tagline": "Ramp w/ Cash 💸",
-    "ogTitle": "Ramp w/ Cash 💸",
-    "ogDescription": "Onramp cUSD, USDT & USDC using African Local Currencies onto Farcaster wallet.",
+    "tagline": "Ramp w. Cash",
+    "ogTitle": "Ramp w. Cash",
+    "ogDescription": "Onramp cUSD, USDT, USDC using African Local Currencies onto Farcaster wallet.",
     "ogImageUrl": "https://ramp-w-cash.vercel.app/opengraph-image.png",
     "noIndex": false
   }
