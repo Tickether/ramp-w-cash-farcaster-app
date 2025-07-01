@@ -1,8 +1,8 @@
 {
   "accountAssociation": {
-    "header": "eyJmaWQiOjk3ODQzOCwidHlwZSI6ImN1c3RvZHkiLCJrZXkiOiIweDNlNzU1Yjk5QjIxNDc1ZjQxQkZjNDA1RmI2ODJiMjk4ODJDYzUxNDMifQ",
-    "payload": "eyJkb21haW4iOiJ3YXJwLjN3Yi5jbHViIn0",
-    "signature": "MHhhMDliZmIxZDhhZjJhNmZiYjY0NGQyZjEwODJmYzc4ZjU4ZjRmOGNkZjgzZmYzOGZkNmJmMzllYTEzNWRjMDVkNzczNGY4YTNhNDhlMGJiYTIwZjJkMzFmOGViNzNiOWZjOGI3OWMzYjNmNjg3YjZjMDljYWY2ZmNhZjFjZGRjNDFi"
+    "header": "",
+    "payload": "",
+    "signature": ""
   },
   "frame": {
     "version": "next",
@@ -10,7 +10,7 @@
     "iconUrl": "https://ramp-w-cash.vercel.app/logo.png",
     "homeUrl": "https://ramp-w-cash.vercel.app",
     "imageUrl": "https://ramp-w-cash.vercel.app/opengraph-image.png",
-    "buttonTitle": "Ramp w/ Cash �",
+    "buttonTitle": "Ramp w/ Cash 💸",
     "splashImageUrl": "https://ramp-w-cash.vercel.app/logo.png",
     "splashBackgroundColor": "#f5f0ec",
     "webhookUrl": "https://ramp-w-cash.vercel.app/webhook",
